@@ -619,6 +619,16 @@ function lockdownMarkForReview(value) {
   }
 }
 
+function toggleLA_warning(value) {
+	var la_warning = document.getElementById("assessmentSettingsAction\\:linear_access_warning");
+	if (value == 1) {
+		la_warning.style.display = "block";
+	}
+	else {
+		la_warning.style.display = "none";
+	}
+}
+
 function initTimedCheckBox(){
 		var timedHours = document.getElementById("assessmentSettingsAction\:timedHours");
 		var timedHoursVal = timedHours.options[timedHours.selectedIndex].value;

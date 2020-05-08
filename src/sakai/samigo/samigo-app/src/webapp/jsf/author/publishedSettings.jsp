@@ -94,9 +94,11 @@
           });
 
           // SAM-2121: Lockdown the question layout and mark for review if necessary
-          var navVal = $('#assessmentSettingsAction\\:itemNavigation input:radio:checked').val();
+          //var navVal = $('#assessmentSettingsAction\\:itemNavigation input:radio:checked').val();
+		  var navVal = $('input[name=assessmentSettingsAction\\:itemNavigation]:checked).val();
           lockdownQuestionLayout(navVal);
           lockdownMarkForReview(navVal);
+		  toggleLA_warning(navVal);
           showHideReleaseGroups();
           initTimedCheckBox();
           checkUncheckTimeBox();
@@ -609,16 +611,16 @@
     <h:panelGroup styleClass="form-group row" layout="block" rendered="#{publishedSettings.valueMap.itemAccessType_isInstructorEditable==true}">
       <h:outputLabel styleClass="col-md-2" for="itemNavigation" value="#{assessmentSettingsMessages.navigation}" />
       <div class="col-md-10">
-        <t:selectOneRadio id="itemNavigation" value="#{publishedSettings.itemNavigation}"  layout="spread" onclick="setBlockDivs();updateItemNavigation(true);lockdownQuestionLayout(this.value);lockdownMarkForReview(this.value);">
-          <f:selectItem itemValue="1" itemLabel="#{assessmentSettingsMessages.linear_access}"/>
+        <t:selectOneRadio id="itemNavigation" value="#{publishedSettings.itemNavigation}"  layout="spread" onclick="setBlockDivs();updateItemNavigation(true);lockdownQuestionLayout(this.value);lockdownMarkForReview(this.value);toggleLA_warning(this.value);">
           <f:selectItem itemValue="2" itemLabel="#{assessmentSettingsMessages.random_access}"/>
+		  <f:selectItem itemValue="1" itemLabel="#{assessmentSettingsMessages.linear_access}"/>
         </t:selectOneRadio>
         <ul class="layout-navigation">
           <li><t:radio for="itemNavigation" index="0" /></li>
           <li><t:radio for="itemNavigation" index="1" /></li>
         </ul>
         <div class="info-text help-block small">
-          <h:outputText value="#{assessmentSettingsMessages.linear_access_warning} "/>
+          <h:outputText id="linear_access_warning" value="#{assessmentSettingsMessages.linear_access_warning} "/>
         </div>
     </div>
   </h:panelGroup>
